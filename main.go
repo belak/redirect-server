@@ -37,7 +37,6 @@ type RouteConfig struct {
 
 func main() {
 	if isatty.IsTerminal(os.Stdout.Fd()) {
-		//logger = zerolog.New(os.Stdout)
 		logger = zerolog.New(zerolog.NewConsoleWriter())
 	} else {
 		logger = zerolog.New(os.Stdout)
@@ -109,7 +108,7 @@ func main() {
 			return
 		}
 
-		// If we didn't have an exact match, use the fallback domain.
+		// If we didn't have an exact match, try the fallback domain.
 		if starDomain := config.Domains["*"]; starDomain != nil {
 			handleDomain(w, r, starDomain, urlPath)
 			return

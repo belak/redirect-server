@@ -19,6 +19,8 @@ RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/
 # Copy the built seabird into the container
 COPY --from=builder /build /bin
 
+ENV REDIRECTS_CONFIG /srv/redirect-server/redirects.json
+
 EXPOSE 8080
 
 ENTRYPOINT ["/bin/redirect-server"]
