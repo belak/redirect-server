@@ -96,7 +96,7 @@ func main() {
 
 	handler := c.ThenFunc(func(w http.ResponseWriter, r *http.Request) {
 		urlHost := extractHostname(r.Host)
-		urlPath := strings.Trim(path.Clean(r.URL.Path), "/")
+		urlPath := strings.ToLower(strings.Trim(path.Clean(r.URL.Path), "/"))
 
 		hlog.FromRequest(r).UpdateContext(func(c zerolog.Context) zerolog.Context {
 			return c.Str("hostname", urlHost).Str("path", urlPath)

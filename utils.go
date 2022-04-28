@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net"
 	"os"
+	"strings"
 )
 
 func extractHostname(rawHost string) string {
@@ -29,5 +30,19 @@ func readConfig() (*Config, error) {
 	}
 
 	err = json.Unmarshal(data, &c)
-	return &c, err
+
+	ret := Config{
+		Domains: make(map[string]*DomainConfig),
+	}
+	for k, v := range ret.Domains {
+		domainConfig := &DomainConfig{
+			Routes: make(map[string]*RouteConfig),
+		}
+		for k2, v2 := range v.Routes {
+			domainConfig.Routes[strings.ToLower(k2)] = v2
+		}
+		ret.Domains[strings.ToLower(k)] = domainConfig
+	}
+
+	return &ret, err
 }
