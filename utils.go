@@ -34,7 +34,7 @@ func readConfig() (*Config, error) {
 	ret := Config{
 		Domains: make(map[string]*DomainConfig),
 	}
-	for k, v := range ret.Domains {
+	for k, v := range c.Domains {
 		domainConfig := &DomainConfig{
 			Routes: make(map[string]*RouteConfig),
 		}
