@@ -1,5 +1,5 @@
 # Stage 1: Build the application
-FROM golang:1.16 as builder
+FROM golang:1.18 as builder
 
 RUN mkdir /build
 
